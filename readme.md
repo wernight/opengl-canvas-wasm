@@ -3,6 +3,22 @@ Live demo: https://timhutton.github.io/opengl-canvas-wasm/
 Instructions:
 -------------
 
+### Using Docker
+
+You can use the containerized builder:
+
+   $ git clone https://github.com/timhutton/opengl-canvas-wasm.git
+   $ cd opengl-canvas-wasm
+   $ docker build -t builder .
+   $ docker run --rm -it -v $PWD:/code -v emcache:/root/.emscripten_cache -p 8080:8080 builder
+
+Wait a bit and then just open your local browser and go to http://localhost:8080 to see it run.
+
+Note: `-v emcache:/root/.emscripten_cache` is optional to speed up recompilations.
+
+
+### Builder manually
+
 1. Install Emscripten:
 
     http://emscripten.org
@@ -10,9 +26,9 @@ Instructions:
 2. Clone this repo:
 
     ```git clone https://github.com/timhutton/opengl-canvas-wasm.git```
-    
+
     ```cd opengl-canvas-wasm```
-    
+
 3. Build index.js and index.wasm:
 
     ```emcc main.cpp -std=c++11 -s WASM=1 -s USE_SDL=2 -O3 -o index.js```
@@ -24,7 +40,7 @@ Instructions:
     Chrome doesn't support file:// XHR requests, so you need to first start a webserver, e.g.:
 
     with Python 2: ```python -m SimpleHTTPServer 8080```
-    
+
     with Python 3: ```python -m http.server 8080```
 
     and then open this URL:
